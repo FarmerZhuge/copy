@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <mete http-equiv='Expires' content='0'></mete>
+    <link rel="stylesheet" href="css.css">
+</head>
+<style>
+
+</style>
+
+<body>
+    <div class="a">这是我要复制的内容</div>
+    <button>复制</button>
+    <script>
+        let target = document.getElementsByClassName('a')[0];
+        let btn = document.getElementsByTagName('button')[0];
+
+        function myCopy(target, id = 'copy-input') {
+            this.target = target;
+            this.id = id;
+            this.copy = () => {
+                let input = document.getElementById('copy-input');
+                if (!input) {
+                    input = document.createElement('input');
+                    input.id = this.id;
+                    input.style.position = 'absolute';
+                    input.style.top = '-100px';
+                    document.body.appendChild(input);
+                }
+                input.value = target.innerHTML;
+                input.setSelectionRange(0, input.value.length);
+                input.focus();
+                if(document.execCommand('copy', false, null)) {
+                    alert('复制成功');
+                } else {
+                    alert('复制失败');
+                }
+            }
+        }
+
+        let c = new myCopy(target);
+
+        btn.addEventListener('click', c.copy);
+    </script>
+</body>
+
+</html>
